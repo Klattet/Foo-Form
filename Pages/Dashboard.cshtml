@@ -1,0 +1,73 @@
+﻿@page
+@using Foo_Form.Models
+@model Foo_Form.Pages.DashboardModel
+
+<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+    <div class="container-fluid" style="width:100%">
+        <a class="navbar-brand" style="-moz-user-select:none;-ms-touch-select:none;-ms-user-select:none;user-select:none">Foo Form</a>
+        <form class="d-flex">
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit" asp-page="/SignOut">Sign Out</button>
+        </form>
+    </div>
+</nav>
+
+<div class="row d-flex justify-content-center align-items-center" style="height:100vh">
+    <div class="col-lg-3 col-md-3 col-sm-12">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Date Joined</th>
+                    <th>Email</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Record record in Model.Records)
+                {
+                    <tr>
+                        <td>
+                            @record.Name
+                        </td>
+                        <td>
+                            @record.DateJoined
+                        </td>
+                        <td>
+                            @record.Email
+                        </td>
+                        <td></td>
+                    </tr>
+                }
+                <form method="post">
+                    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                <tr>
+                    <td>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" asp-for="RecordDTO.Name">
+                            <label asp-for="RecordDTO.Name">Name</label>
+                            <span class="text-danger" asp-validation-for="RecordDTO.Name"></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-floating">
+                            <input type="date" class="form-control" asp-for="RecordDTO.DateJoined">
+                            <label asp-for="RecordDTO.DateJoined">Date Joined</label>
+                            <span class="text-danger" asp-validation-for="RecordDTO.DateJoined"></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-floating">
+                            <input type="text" class="form-control" asp-for="RecordDTO.Email">
+                            <label asp-for="RecordDTO.Email">Email</label>
+                            <span class="text-danger" asp-validation-for="RecordDTO.Email"></span>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary my-2 my-sm-0" type="submit">Add</button>
+                    </td>
+                </tr>
+                </form>
+            </tbody>
+        </table>
+    </div>
+</div>

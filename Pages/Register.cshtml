@@ -1,0 +1,34 @@
+﻿@page
+@model RegisterModel
+
+<div class="row d-flex justify-content-center align-items-center" style="height:100vh">
+    <div class="col-lg-3 col-md-3 col-sm-12">
+        <div class="card bg-light login-card">
+            <div class="card-header text-center">Register</div>
+            <div class="card-body">
+                <form method="post">
+                    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" asp-for="RegisterDTO.Email">
+                        <label asp-for="RegisterDTO.Email">Email</label>
+                        <span class="text-danger" asp-validation-for="RegisterDTO.Email"></span>
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInput" asp-for="RegisterDTO.UserName">
+                        <label asp-for="RegisterDTO.UserName">Username</label>
+                        <span class="text-danger" asp-validation-for="RegisterDTO.UserName"></span>
+                    </div>
+                    <div class="form-floating">
+                        <input type="password" class="form-control" id="floatingPassword" autocomplete="off" asp-for="RegisterDTO.Password">
+                        <label asp-for="RegisterDTO.Password">Password</label>
+                        <span class="text-danger" asp-validation-for="RegisterDTO.Password"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width:100%;margin:3px;margin-left:revert">Register</button>
+                </form>
+                <form method="get">
+                    <button type="submit" class="btn btn-secondary" style="width:100%;margin:3px;margin-left:revert" asp-page="/Login">Already signed up? Log in!</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

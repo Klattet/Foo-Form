@@ -1,0 +1,30 @@
+﻿@page
+@model LoginModel
+
+
+<div class="row d-flex justify-content-center align-items-center" style="height:100vh">
+    <div class="col-lg-3 col-md-3 col-sm-12">
+        <div class="card bg-light login-card">
+            <div class="card-header text-center">Register</div>
+            <div class="card-body">
+                <form method="post">
+                    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" asp-for="LoginDTO.UserName">
+                        <label asp-for="LoginDTO.UserName">Username</label>
+                        <span class="text-danger" asp-validation-for="LoginDTO.UserName"></span>
+                    </div>
+                    <div class="form-floating">
+                        <input type="password" class="form-control" id="floatingPassword" autocomplete="off" asp-for="LoginDTO.Password">
+                        <label asp-for="LoginDTO.Password">Password</label>
+                        <span class="text-danger" asp-validation-for="LoginDTO.Password"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width:100%;margin:3px;margin-left:revert">Log in</button>
+                </form>
+                <form method="get">
+                    <button type="submit" class="btn btn-secondary" style="width:100%;margin:3px;margin-left:revert" asp-page="/Register">Don't have an account? Register now!</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
