@@ -8,7 +8,6 @@ namespace Foo_Form.Models
     {
         public required string Name { get; set; }
 
-        [BindProperty, DataType(DataType.Date)]
         public required DateTime DateJoined { get; set; }
         public required string Email { get; set; }
     };

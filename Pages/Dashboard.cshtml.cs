@@ -30,32 +30,69 @@ namespace Foo_Form.Pages
             }
         }
 
-        public IActionResult OnPost() {
-            if (!ModelState.IsValid)
-            {
-
-                return Page();
-            }
+        public IActionResult OnPostAdd() {
 
             var user_id_string = Request.Cookies["user_id"];
 
             if (user_id_string != null)
             {
                 var user_id_int = int.Parse(user_id_string);
-                Console.
+
+                var name = Request.Form["name"];
+                var date = Request.Form["date"];
+                var email = Request.Form["email"];
+
+                var bad_data_flag = false;
+
+                if (String.IsNullOrEmpty(name))
+                {
+                    ModelState.AddModelError("RecordDTO.Name", "Name is a required field!");
+                    bad_data_flag = true;
+                }
+                if (String.IsNullOrEmpty(date))
+                {
+                    ModelState.AddModelError("RecordDTO.DateJoined", "Date is a required field!");
+                    bad_data_flag = true;
+                }
+                if (String.IsNullOrEmpty(email))
+                {
+                    ModelState.AddModelError("RecordDTO.Email", "Email is a required field!");
+                    bad_data_flag = true;
+                }
+
+                if (bad_data_flag)
+                {
+                    this.Records = Context.Records.Where(rec => rec.OwnerId.ToString() == Request.Cookies["user_id"]).ToList();
+                    return Page();
+                }
+                
                 Context.Records.Add(
                     new Record
                     {
-                        Name = RecordDTO.Name,
-                        DateJoined = DateOnly.FromDateTime(RecordDTO.DateJoined),
-                        Email = RecordDTO.Email,
+                        Name = name,
+                        DateJoined = DateOnly.Parse(date),
+                        Email = email,
                         OwnerId = user_id_int
                     }
                 );
+                Context.SaveChanges();
+                ModelState.Clear();
             }
-            return Page();
+            return OnGet();
+        }
+
+        public IActionResult OnPostRemove(int id)
+        {
+            var record = Context.Records.FirstOrDefault(rec => rec.Id == id);
+            if (record != null)
+            {
+                Context.Remove(record);
+                Context.SaveChanges();
+            }
+            return OnGet();
         }
 
         public RecordDTO RecordDTO { get; set; }
+        public DateTime DateTime { get; set; }
     }
 }

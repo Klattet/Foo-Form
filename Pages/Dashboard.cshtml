@@ -13,7 +13,7 @@
 
 <div class="row d-flex justify-content-center align-items-center" style="height:100vh">
     <div class="col-lg-3 col-md-3 col-sm-12">
-        <table>
+        <table class="table table-hover">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -35,35 +35,42 @@
                         <td>
                             @record.Email
                         </td>
-                        <td></td>
-                    </tr>
+                        <td>
+                            <form method="post" asp-page-handler="Edit" asp-page="Dashboard" asp-route-id="@($"{record.Id}")">
+                                <input type="submit" class="btn btn-primary" value="Edit" style="width:100%"/>
+                            </form>
+                            <form method="post" asp-page-handler="Remove" asp-page="Dashboard" asp-route-id="@($"{record.Id}")">
+                                <input type="submit" class="btn btn-secondary" value="Remove" />
+                            </form>
+                        </td>
+                    </tr>   
                 }
-                <form method="post">
+                <form method="post" asp-page-handler="Add" asp-page="Dashboard">
                     <div class="text-danger" asp-validation-summary="ModelOnly"></div>
                 <tr>
                     <td>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" asp-for="RecordDTO.Name">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" name="name">
                             <label asp-for="RecordDTO.Name">Name</label>
                             <span class="text-danger" asp-validation-for="RecordDTO.Name"></span>
                         </div>
                     </td>
                     <td>
                         <div class="form-floating">
-                            <input type="date" class="form-control" asp-for="RecordDTO.DateJoined">
+                            <input type="date"  class="form-control" name="date">
                             <label asp-for="RecordDTO.DateJoined">Date Joined</label>
                             <span class="text-danger" asp-validation-for="RecordDTO.DateJoined"></span>
                         </div>
                     </td>
                     <td>
                         <div class="form-floating">
-                            <input type="text" class="form-control" asp-for="RecordDTO.Email">
+                            <input type="text" class="form-control" name="email">
                             <label asp-for="RecordDTO.Email">Email</label>
                             <span class="text-danger" asp-validation-for="RecordDTO.Email"></span>
                         </div>
                     </td>
                     <td>
-                        <button class="btn btn-primary my-2 my-sm-0" type="submit">Add</button>
+                        <input type="submit" class="btn btn-primary my-2 my-sm-0" value="Add" style="width:100%" />
                     </td>
                 </tr>
                 </form>
